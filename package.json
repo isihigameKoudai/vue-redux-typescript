@@ -1,0 +1,17 @@
+{
+  "name": "vue-redux-sample",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "redux": "^4.0.5",
+    "vue": "^3.0.4",
+    "vuejs-redux": "^2.4.1"
+  },
+  "devDependencies": {
+    "vite": "^1.0.0-rc.13",
+    "@vue/compiler-sfc": "^3.0.4"
+  }
+}
