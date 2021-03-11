@@ -38,9 +38,12 @@ export const CounterActions: ICounterActionCreators = {
 
 // Reducer
 const CounterReducer: Reducer<ICounterState, CounterAction> = (state = initialState, action) => {
+  console.log(state, action.type);
+  
   switch (action.type) {
     case INCREMENT: {
       return {
+        ...state,
         counter: state.counter + 1
       }
     }
