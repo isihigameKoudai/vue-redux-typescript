@@ -1,18 +1,12 @@
 <template>
-  <Provider
-    :map-dispatch-to-props="mapDispatchToProps"
-    :map-state-to-props="mapStateToProps"
-    :store="store"
-  >
-    <template v-slot:default="{ state, actions }">
-      <slot :state="state" :actions="actions" />
-    </template>
-  </Provider>
+  <div class="store-provider">
+    <slot :state="state.state" :actions="mapDispatchToProps" />
+  </div>
 </template>
 
 <script lang="ts">
 import Provider from '../modules/VueRedux'
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 
 import store, { mapStateToProps, mapDispatchToProps } from '../store'
 
@@ -22,9 +16,17 @@ export default defineComponent({
     Provider
   },
   setup() {
+    const state = reactive({
+      state: store.getState()
+    })
+
+    store.subscribe(() => {
+      state.state = store.getState()
+      console.log(state.state.counter.counter);
+    })
     
     return {
-      store,
+      state,
       mapStateToProps,
       mapDispatchToProps
     }

@@ -1,4 +1,4 @@
-import { defineComponent, SetupContext, h } from 'vue'
+import { defineComponent, SetupContext, h, reactive } from 'vue'
 
 export default defineComponent({
   name: 'Provider',
@@ -19,12 +19,12 @@ export default defineComponent({
     }
   },
   setup(props, context: SetupContext) {
-    console.log(props.mapDispatchToProps, props.mapStateToProps);
-    
+    // const state = reactive(props.store.getState())
+    props.store.subscribe(() => {
+      props.store.getState()
+    })
     const actions = props.mapDispatchToProps(props.store.dispatch)
     const state = props.mapStateToProps(props.store.getState())
-    console.log(state, actions);
-    
-    return () => h('div', { class: 'provider' }, context.slots.default({ actions, state }))
+    return () => h('div', { class: 'provider' }, context.slots.default({ state, actions }))
   }
 })
